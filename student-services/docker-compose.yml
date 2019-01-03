@@ -1,0 +1,31 @@
+version: '3.2'
+services:
+  backend1:
+      image: mtapia79/studentservices:latest
+      working_dir: /
+      tty: true
+      volumes:
+        - './student-services:/student-services'
+  backend2:
+      image: mtapia79/studentservices:latest
+      working_dir: /
+      tty: true
+      volumes:
+        - './student-services:/student-services'
+  backend3:
+      image: mtapia79/studentservices:latest
+      working_dir: /
+      tty: true
+      volumes:
+        - './student-services:/student-services'
+  loadbalancer:
+      image: mtapia79/loadbalancer:latest
+      tty: true
+      links:
+          - backend1
+          - backend2
+          - backend3
+      ports:
+          - '8080:8080'
+volumes:
+  student-services:
